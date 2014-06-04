@@ -44,11 +44,14 @@ class Registry(object):
         return object.__new__(cls, *args, **kwargs)
 
     def __init__(self, prefix = None, output = None, **kwargs):
+        print "WTF %s" % prefix
         if prefix:
             self.__class__.PREFIX = prefix
+            self.PREFIX = prefix
 
         if output:
             self.__class__.OUTPUT_DIR = output
+            self.OUTPUT_DIR = output
 
         self.hosts = dict()
         self.host_templates = dict()
@@ -198,7 +201,7 @@ class Registry(object):
 
     def generate_cluster(self, cluster_name, cluster_config, services):
         ch = Host(use='cluster',
-                  host_name="vip-%s" % cluster_name,
+                  host_name=cluster_name,
                   registry_prefix='cluster',
                   registry=self,
                   qualified=True,

@@ -68,7 +68,7 @@ class Host(BaseObject):
         self.network_site = network_site
 
         self.props.update(self.get_hostname(host_name, network_site, **kwargs))
-        self._registry_prefix = self._datacenter
+        self._registry_prefix = network_site
 
         super(Host, self).__init__(registry=registry, **kwargs)
 

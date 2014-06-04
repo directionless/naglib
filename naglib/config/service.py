@@ -174,7 +174,7 @@ class ServiceCluster(Service):
         self.cluster = "cluster_%s" % cluster_name
 
 
-        self.props['host_name'] = "vip-%s" % self.cluster
+        self.props['host_name'] = self.cluster
         self.props['service_description'] = self.cluster
         self.props['check_command'] = "check_%s" % self.cluster
 
