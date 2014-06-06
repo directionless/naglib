@@ -36,15 +36,18 @@ class ReClassifer(object):
             cre = re.compile(rule['re'])
             for host in self.hosts:
                 kwargs = self._host_args(host)
-                if cre.search(host[field]):
-                    for check in rule['checks']:
-                        print "CONFIGURING CHECK %s" % check
+                for role in host[field].split(','):
+                    print "seph %s " % role.strip()
 
-                        host = self.registry.hosts[Host.identity_for(**kwargs)]
+                    if cre.search(role.strip()):
+                        for check in rule['checks']:
+                            print "CONFIGURING CHECK %s" % check
 
-                        Service(registry=self.registry,
-                                use=check,
-                                host=host)
+                            host = self.registry.hosts[Host.identity_for(**kwargs)]
+
+                            Service(registry=self.registry,
+                                    use=check,
+                                    host=host)
 
     def _host_args(self, host):
         kwargs=dict()
