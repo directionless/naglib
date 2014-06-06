@@ -72,6 +72,11 @@ class Host(BaseObject):
 
         super(Host, self).__init__(registry=registry, **kwargs)
 
+        # network_site needs to be defined. So, if it's null, raise an error
+        if network_site == "":
+            raise Exception("Host %s is missing the network/datacenter" % host_name)
+
+
     @staticmethod
     def get_hostname(host_name = None, network_site = None, **kwargs):
         if network_site:
